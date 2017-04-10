@@ -17,12 +17,19 @@ services:
         networks:
             - code-network
     mongo:
-      image: mongo
-      ports:
+        image: mongo
+        ports:
             - "27018:27017"
-      volumes:
+        volumes:
             - ./code:/code
-      networks:
+        networks:
+            - code-network
+
+    elasticsearch:
+        image: elasticsearch_qfs
+        ports:
+            - "9200:9200"
+        networks:
             - code-network
 
 networks:
