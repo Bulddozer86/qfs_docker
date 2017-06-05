@@ -27,7 +27,6 @@ services:
             - ./code:/code
         networks:
             - code-network
-
     elasticsearch:
         container_name: qfs_elasticsearch
         image: elasticsearch_qfs
