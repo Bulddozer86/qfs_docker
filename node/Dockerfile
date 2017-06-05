@@ -1,19 +1,16 @@
 FROM node:7-onbuild
 
-RUN apt-get update && apt-get -y upgrade
-RUN apt-get install -y vim
+RUN apt-get update && apt-get -y upgrade \
+    apt-get install -y vim
 
 WORKDIR /usr/src/app
 
-#COPY ./app /usr/src/app
-
-RUN npm install react --save
-RUN npm install react-dom --save
-RUN npm install redux --save
-RUN npm install react-redux --save
-RUN npm install redux-thunk --save
-RUN npm install react-redux-form@latest --save
-#RUN npm install
+RUN npm install react --save \
+    npm install react-dom --save \
+    npm install redux --save \
+    npm install react-redux --save \
+    npm install redux-thunk --save \
+    npm install react-redux-form@latest --save
 
 EXPOSE 3000
 
