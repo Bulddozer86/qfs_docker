@@ -2,16 +2,26 @@
 
 source ./bash/variables.sh
 
+IMAGES=(${!ARRAY_CUSTOM_DOCKER_IMAGES[@]})
+
 echo ">> Start building of docker images....";
 
-for i in ${ARRAY_CUSTOM_DOCKER_IMAGES[@]}; do
-  docker images | grep ${i}
-  greprc=$?
+for (( I=0; $I < ${#ARRAY_CUSTOM_DOCKER_IMAGES[@]}; I+=1 )); do
+    IMAGE=${IMAGES[$I]};
 
-  if [[ ! $greprc -eq 0 ]]; then
-    echo "Need building"
-  else
-    echo "Images ${i} installed already"
-  fi
+    docker images | grep ${IMAGE}
+    greprc=$?
 
+    if [[ ! $greprc -eq 0 ]]; then
+      echo "Need building image ${IMAGE}"
+    else
+      echo "Images ${IMAGE} installed already!"
+      cd ${ARRAY_CUSTOM_DOCKER_IMAGES[$IMAGE]}
+#      TODO:: will add docker build there
+      cd ..
+
+    fi
+#    echo $IMAGE --- ${ARRAY_CUSTOM_DOCKER_IMAGES[$IMAGE]};
 done
+
+
