@@ -20,7 +20,9 @@ for (( i=0; $i < ${#ARRAY_CUSTOM_DOCKER_IMAGES[@]}; i+=1 )); do
     else
         echo "Images ${IMAGE} builded already!"
     fi
-#    echo $IMAGE --- ${ARRAY_CUSTOM_DOCKER_IMAGES[$IMAGE]};
 done
+
+docker-compose up -d
+
 
 
