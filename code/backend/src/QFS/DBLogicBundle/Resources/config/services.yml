@@ -1,0 +1,4 @@
+services:
+#    db_logic.example:
+#        class: QFS\DBLogicBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

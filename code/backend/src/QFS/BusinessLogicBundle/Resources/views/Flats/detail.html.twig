@@ -1,0 +1,27 @@
+{% extends 'BusinessLogicBundle::layout.html.twig' %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-12">
+      {% if flat %}
+        <div class="panel panel-default">
+          <div class="panel-heading"><a href="{{ path('business_logic_homepage') }}" class="pull-right">Back</a>
+            <h4>{{ flat.headline }}</h4>
+          </div>
+          <div class="panel-body">
+            <div class="list-group">
+              <a href="http://bootply.com/tagged/modal" class="list-group-item">Modal / Dialog</a>
+              <a href="http://bootply.com/tagged/datetime" class="list-group-item">Datetime Examples</a>
+              <a href="http://bootply.com/tagged/datatable" class="list-group-item">Data Grids</a>
+            </div>
+            <div class="description">
+              {{ flat.maindata }}
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div class="alert alert-danger" role="alert">Flat not found</div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

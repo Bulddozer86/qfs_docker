@@ -1,0 +1,6 @@
+business_logic_homepage:
+    path:     /
+    defaults: { _controller: BusinessLogicBundle:Page:index }
+detail_page:
+    path:     /detail/{id}
+    defaults: { _controller: BusinessLogicBundle:Page:detail }

@@ -1,0 +1,28 @@
+#business_logic:
+#    resource: "@BusinessLogicBundle/Resources/config/routing.yml"
+#    prefix:   /
+
+#db_logic:
+#    resource: "@DBLogicBundle/Controller/"
+#    type:     annotation
+#    prefix:   /
+
+#flat_parcer:
+#    resource: "@FlatParserBundle/Controller/"
+#    type:     annotation
+#    prefix:   /
+
+#app:
+#    resource: "@AppBundle/Controller/"
+#    type:     annotation
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix: "/doc"
+
+api:
+    type: rest
+    resource: "routing_api.yml"

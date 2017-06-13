@@ -5,6 +5,7 @@ RUN apt-get update \
     && apt-get install -y autoconf g++ make openssl libssl-dev libcurl4-openssl-dev pkg-config libsasl2-dev libpcre3-dev \
     && pecl install mongodb \
     && pecl install xdebug-beta \
-	  && docker-php-ext-enable xdebug
+	  && docker-php-ext-enable xdebug \
+	  && apt-get install -y zip unzip
 
 RUN echo "extension=mongodb.so" > $PHP_INI_DIR/conf.d/mongodb.ini

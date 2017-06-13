@@ -1,0 +1,6 @@
+services:
+    flat_parser.downloader:
+        class: FlatParserBundle\Resources\Services\Downloader
+#    flat_parcer.example:
+#        class: FlatParserBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

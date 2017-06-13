@@ -1,0 +1,3 @@
+blog_posts:
+    type: rest
+    resource: "@BusinessLogicBundle/Resources/config/routing.yml"

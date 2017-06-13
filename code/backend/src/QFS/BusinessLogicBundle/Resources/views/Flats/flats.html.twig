@@ -1,0 +1,52 @@
+{% extends 'BusinessLogicBundle::layout.html.twig' %}
+
+{% block content %}
+  {% if data %}
+    <div class="row">
+      {% for flats in data %}
+        <div class="col-sm-{{ column }} col-xs-6">
+          {% for flat in flats %}
+            <div class="panel panel-default flat">
+              <div class="panel-heading">
+                <a href="#" class="pull-right price">{{ flat.price }}</a>
+                <h4>
+                  <span class="date">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                    {{ flat.date|date('m.d.Y H:s:i') }}
+                  </span>
+                  {{ flat.district }}
+                </h4>
+              </div>
+              <div class="panel-thumbnail">
+                {% if flat.images %}
+                  <img src="{{ flat.images.0 | imagine_filter('flat_preview') }}" class="img-responsive">
+                {% else %}
+                  <img src="//placehold.it/450X300/DD3333/EE3333" class="img-responsive">
+                {% endif %}
+              </div>
+              <div class="panel-body">
+                <div class="resource-logo">
+                  <img src="img/{{ flat.resource }}.png" class="{{ flat.resource }}-logo">
+                </div>
+                <h4 class="lead">
+                  <a href="{{ path('detail_page', {'id': flat.hash}) }}">{{ flat.headline }}</a>
+                </h4>
+              </div>
+            </div>
+          {% endfor %}
+        </div><!--/col-->
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+          No one item in database now
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
