@@ -14,9 +14,6 @@ IMAGE_MONGO="mongo"
 IMAGE_ELASTICSEARCH="elasticsearch_qfs"
 IMAGE_NODE="node_qfs"
 
-declare -A ARRAY_CUSTOM_DOCKER_IMAGES
-ARRAY_CUSTOM_DOCKER_IMAGES=([$IMAGE_PHP]='php' [$IMAGE_ELASTICSEARCH]='elasticsearch' [$IMAGE_NODE]='node')
-
 #DOCKER NAMES
 D_MONGO="qfs_mongo"
 D_ELASTICSEARCH="qfs_elasticsearch"

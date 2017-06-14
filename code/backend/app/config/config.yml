@@ -146,7 +146,7 @@ fos_rest:
 # FOS Elastic
 fos_elastica:
     clients:
-            default: { host: localhost, port: 9200 }
+            default: { host: qfs_elasticsearch, port: 9200 }
     indexes:
         qfs:
             types:

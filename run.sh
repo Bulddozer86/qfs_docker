@@ -18,6 +18,9 @@ function info_msg {
   echo -e "\n${TEXT_COLOR}\e[44m \n $1 \n \e[49m\n"
 }
 
+declare -A ARRAY_CUSTOM_DOCKER_IMAGES
+ARRAY_CUSTOM_DOCKER_IMAGES=([$IMAGE_PHP]='php' [$IMAGE_ELASTICSEARCH]='elasticsearch' [$IMAGE_NODE]='node')
+
 IMAGES=(${!ARRAY_CUSTOM_DOCKER_IMAGES[@]})
 
 info_msg ">> Start building of docker images....";
@@ -41,27 +44,39 @@ done
 
 docker-compose up -d
 
-is_docker_php=$(docker ps | grep ${D_PHP})
-is_docker_php=$?
 
-is_docker_server=$(docker ps | grep ${D_SERVER})
-is_docker_server=$?
+info_msg 'Run dockers please waiting ... '
 
-if [[ ! $is_docker_php -eq 0 ]]; then
-    error_msg "Docker '${D_PHP}' not run at the moment"
-    docker ps -a
-    exit 0
-fi
+ARRAY_DOCKER_NAMES=($D_MONGO $D_ELASTICSEARCH $D_FRONTEND $D_SERVER $D_PHP)
+COUNTER=30
+INDEX=0
 
-if [[ ! $is_docker_server -eq 0 ]]; then
-    error_msg "Docker '${D_SERVER}' not run at the moment"
-    docker ps -a
-    exit 0
-fi
+while true; do
+    if [[ ${COUNTER} -eq 0 ]]; then
+         error_msg "Cannot run all required dockers"
+         exit 0
+    fi
 
-docker exec -t -i $D_PHP php bin/console parser:run
-docker exec -t -i $D_PHP php bin/console cleaner:run
-docker exec -t -i $D_PHP php bin/console flat:download
+    if [[ ${#ARRAY_DOCKER_NAMES[@]} -eq $((${INDEX})) ]]; then
+         success_msg "All required dockers was run"
+         break
+    fi
+
+    for i in ${ARRAY_DOCKER_NAMES[@]}; do
+        grep_result=$(docker ps | grep ${i})
+        greprc=$?
+
+        if [[ $greprc -eq 0 ]]; then
+            let INDEX+=1
+        fi
+        sleep 1
+    done
+    let COUNTER-=1
+done
+
+#docker exec -t -i $D_PHP php bin/console parser:run
+#docker exec -t -i $D_PHP php bin/console cleaner:run
+#docker exec -t -i $D_PHP php bin/console flat:download
 #php bin/console fos:elastica:populate
 
 #docker exec -it nginx-server nginx -s reload

@@ -1,2 +1,4 @@
 parameters:
     env(MONGODB_SERVER): qfs_mongo
+    env(ELASTICSEARCH_HOST): qfs_elasticsearch
+    env(ELASTICSEARCH_PORT): 9200
