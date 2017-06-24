@@ -105,9 +105,10 @@ info_msg "Run dockers please waiting ... "
 docker-compose up -d
 start_all_required_dockers & spinner $!
 
+sleep 5
+
 docker exec -t -i $D_PHP php bin/console parser:run
-#docker exec -t -i $D_PHP php bin/console cleaner:run
+docker exec -t -i $D_PHP php bin/console cleaner:run
 docker exec -t -i $D_PHP php bin/console flat:download
 #php bin/console fos:elastica:populate
-
 #docker exec -it nginx-server nginx -s reload

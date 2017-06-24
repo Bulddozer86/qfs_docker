@@ -52,6 +52,11 @@ class CleanerCommand extends Command
     }
 
     foreach ($resources as $name => $value) {
+
+      if (!isset($links[$name])) {
+        continue;
+      }
+
       $contents = Downloader::download($links[$name]);
 
       if (!$contents || !is_array($contents)) {

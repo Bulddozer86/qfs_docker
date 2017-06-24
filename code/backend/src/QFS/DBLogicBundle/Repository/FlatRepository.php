@@ -21,4 +21,9 @@ class FlatRepository extends DocumentRepository
     {
         return $this->findOneBy(['hash' => ['$eq' => $hash]]);
     }
+
+    public function findByAlias($alias)
+    {
+        return $this->findOneBy(['alias' => ['$eq' => $alias]]);
+    }
 }

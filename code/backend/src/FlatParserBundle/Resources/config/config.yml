@@ -30,9 +30,9 @@ parameters:
                  parser:
                      selector: '.row.row-dense'
              step_one:
-                 link: http://www.real-estate.lviv.ua/orenda-kvartira/Lviv#orderby_dateins
-                 phone_link: http://www.real-estate.lviv.ua/ajax_show_phone_object/_ID_
-                 prefix_to_detail: http://www.real-estate.lviv.ua
+                 link: https://www.real-estate.lviv.ua/orenda-kvartira/Lviv#orderby_dateins
+                 phone_link: https://www.real-estate.lviv.ua/ajax_show_phone_object/_ID_
+                 prefix_to_detail: https://www.real-estate.lviv.ua
                  post:
                     data: 'hash=%23orderby_dateins'
                  parser:
