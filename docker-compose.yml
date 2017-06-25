@@ -31,7 +31,7 @@ services:
         container_name: qfs_elasticsearch
         image: elasticsearch_qfs
         ports:
-            - "9200:9200"
+            - "9203:9203"
         networks:
             - code-network
     node:

@@ -1,0 +1,3 @@
+business_logic_homepage:
+    path:     /
+    defaults: { _controller: BusinessLogicBundle:Page:index }
