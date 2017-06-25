@@ -2,5 +2,5 @@ business_logic_main_page:
     path:     /main
     defaults: { _controller: BusinessLogicBundle:MainPage:list }
 detail_page:
-    path:     /detail/{id}
-    defaults: { _controller: BusinessLogicBundle:Page:detail }
+    path:     /detail/{alias}
+    defaults: { _controller: BusinessLogicBundle:MainPage:detail }

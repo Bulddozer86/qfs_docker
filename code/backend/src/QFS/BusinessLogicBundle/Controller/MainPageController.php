@@ -16,7 +16,6 @@ class MainPageController extends Controller
             ->findLatestItems();
 
         $grid = new GridData($flats, 4);
-        $grid->getGridData();
 
         return $this->render(
           'BusinessLogicBundle:Flats:flats.html.twig',
@@ -25,6 +24,15 @@ class MainPageController extends Controller
             'column' => $grid->getColumn(),
           ]
         );
+    }
 
+    public function detailAction($alias)
+    {
+        $flat = $this->get('doctrine_mongodb')
+            ->getManager()
+            ->getRepository('DBLogicBundle:Flat')
+            ->findByAlias($alias);
+
+        return $this->render('BusinessLogicBundle:Flats:detail.html.twig', ['flat' => $flat]);
     }
 }

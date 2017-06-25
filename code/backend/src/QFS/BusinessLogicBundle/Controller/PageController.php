@@ -59,14 +59,6 @@ class PageController extends FOSRestController implements ClassResourceInterface
 //        );
     }
 
-    public function detailAction($id)
-    {
-        $flat = $this->get('doctrine_mongodb')
-          ->getManager()
-          ->getRepository('DBLogicBundle:Flat')
-          ->findByHash($id);
 
-        return $this->render('BusinessLogicBundle:Flats:detail.html.twig', ['flat' => $flat]);
-    }
 
 }
