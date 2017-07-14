@@ -3,7 +3,7 @@
 source ./bash/variables.sh
 
 declare -A ARRAY_CUSTOM_DOCKER_IMAGES
-ARRAY_CUSTOM_DOCKER_IMAGES=([$IMAGE_PHP]='php' [$IMAGE_ELASTICSEARCH]='elasticsearch' [$IMAGE_NODE]='node')
+ARRAY_CUSTOM_DOCKER_IMAGES=([$IMAGE_NGINX]='nginx' [$IMAGE_PHP]='php' [$IMAGE_ELASTICSEARCH]='elasticsearch' [$IMAGE_NODE]='node')
 ARRAY_DOCKER_NAMES=($D_MONGO $D_ELASTICSEARCH $D_FRONTEND $D_SERVER $D_PHP)
 
 function error_msg {
@@ -102,7 +102,7 @@ done
 info_msg "Stop dockers if exist already"
 stop_run_old_dockers & spinner $!
 info_msg "Run dockers please waiting ... "
-docker-compose up -d
+docker-compose up -d --force-recreate
 start_all_required_dockers & spinner $!
 
 sleep 5
@@ -110,5 +110,37 @@ sleep 5
 docker exec -t -i $D_PHP php bin/console parser:run
 docker exec -t -i $D_PHP php bin/console cleaner:run
 docker exec -t -i $D_PHP php bin/console flat:download
+
+APACHE_CONF="
+<VirtualHost *:80>
+  ServerName ${DOMAIN_NAME}
+
+  ProxyPreserveHost On
+  ProxyPass / ${PROXY_PASS}
+  ProxyPassReverse / ${PROXY_PASS}
+
+  ErrorLog /var/log/apache2/${PROJECT_NAME}.error.log
+
+  LogLevel debug
+
+  CustomLog /var/log/apache2/${PROJECT_NAME}.log combined
+</VirtualHost>
+"
+
+echo ">> Add local environment"
+
+sudo a2enmod proxy_http && a2enmod headers && a2enmod rewrite
+echo "${APACHE_CONF}" > /etc/apache2/sites-enabled/${PROJECT_NAME}.conf
+
+cat /etc/hosts | grep ${PROJECT_NAME}
+greprc=$?
+
+if [[ ! $greprc -eq 0 ]] ;
+then
+  echo "127.0.0.1 ${DOMAIN_NAME}" >> /etc/hosts
+fi;
+
+sudo service apache2 restart
+
 #php bin/console fos:elastica:populate
 #docker exec -it nginx-server nginx -s reload

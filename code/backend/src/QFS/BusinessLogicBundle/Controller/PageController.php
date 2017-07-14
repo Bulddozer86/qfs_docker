@@ -39,14 +39,14 @@ class PageController extends FOSRestController implements ClassResourceInterface
         $repository = $repositoryManager->getRepository('DBLogicBundle:Flat');
 
         /** var array of Acme\UserBundle\Entity\User */
-        $users = $repository->find('квартиру');
+        $users = $repository->find('квара');
 
         $flats = $this->get('doctrine_mongodb')
           ->getManager()
           ->getRepository('DBLogicBundle:Flat')
           ->findLatestItems();
 
-        return $users;
+        return ['hello'];
 //        $grid = new GridData($flats, self::STEP);
 //        $grid->getGridData();
 //
