@@ -4,7 +4,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
+phpinfo();
+die();
 ///** @var \Composer\Autoload\ClassLoader $loader */
 //$loader = require __DIR__.'/../app/autoload.php';
 //include_once __DIR__.'/../var/bootstrap.php.cache';

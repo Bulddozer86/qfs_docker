@@ -13,6 +13,7 @@ parameters:
     locale: en
 
 framework:
+    translator: ~
     #esi:             ~
     #translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
@@ -180,3 +181,10 @@ fos_elastica:
                             immediate: ~
                         finder: ~
 
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: QFS\DBLogicBundle\Entity\User
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"
